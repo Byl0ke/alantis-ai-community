@@ -1,6 +1,6 @@
 # ✦ ALANTIS AI — Community Edition 2.0
 
-**Tu plataforma de inteligencia artificial con usuarios y chats privados.** Proyecto completo con frontend responsive negro/dorado y backend FastAPI. Esta versión está lista para **pruebas locales y un despliegue beta controlado**, pero **NO se ha publicado** automáticamente.
+**Tu plataforma de inteligencia artificial con usuarios y chats privados.** Proyecto completo con frontend responsive negro/dorado y backend FastAPI. Esta versión está lista para **pruebas locales y un despliegue beta controlado**. La **vista previa pública de Render** está desplegada en [alantis-ai-community.onrender.com](https://alantis-ai-community.onrender.com), con el registro CERRADO y sin un proveedor de IA conectado.
 
 ## Qué incluye
 
@@ -63,22 +63,19 @@ git push -u origin main
 
 Repositorio oficial: **https://github.com/Byl0ke/alantis-ai-community**. Se publica el **código**, no la web operativa. GitHub Pages no puede ejecutar el backend Python.
 
-## 4. Publicar en Render (beta)
+## 4. Estado actual en Render (vista previa gratuita)
 
-1. Conecta el repositorio GitHub a [Render](https://render.com/) → **New → Blueprint** (incluye `render.yaml`).
-2. **Revisa los costes antes de aprobar:** el blueprint propone un web service gratuito para pruebas **y una base de datos PostgreSQL de pago** para evitar pérdida de cuentas y conversaciones.
-3. Configura la variable secreta `ALANTIS_API_KEY` en Render. Sin clave de un proveedor válido, el chat no funcionará.
-4. Render proporciona una URL `https://...onrender.com` con HTTPS sin comprar dominio.
-5. Mantén `ALANTIS_REGISTRATION_OPEN=false` hasta completar privacidad, protección antibots y verificaciones. Para hacer un test cerrado, habilita el registro temporalmente y después vuelve a cerrarlo.
-6. Para crear un administrador: registra un usuario, usa una terminal privada con `DATABASE_URL` del mismo PostgreSQL y ejecuta:
+- **URL pública:** https://alantis-ai-community.onrender.com
+- **Servicio:** https://dashboard.render.com/web/srv-dbbas2s9v7es73ei2510
+- **Plan:** web service `free`, región Frankfurt, despliegues automáticos desde la rama `main`.
+- **Registro:** CERRADO (`ALANTIS_REGISTRATION_OPEN=false`). No deben registrarse usuarios reales en esta fase.
+- **Persistencia:** aún NO hay `DATABASE_URL`; el contenedor usa SQLite temporal, que puede perderse en cualquier redeploy o reinicio.
+- **IA:** aún NO hay `ALANTIS_API_KEY`; no se pueden enviar chats al proveedor remoto.
+- **Coste:** no se ha contratado PostgreSQL ni ninguna API de pago. La vista previa usa la capacidad incluida en Render Free y sigue sus límites de uso.
 
-```bash
-python -m backend.manage promote-admin TU_USUARIO
-```
+**No abras registros públicos** sin una base de datos independiente y persistente, configuración de un proveedor de IA, seguridad/antibots, políticas legales y pruebas de extremo a extremo. Render permite una sola base Postgres `free` por espacio de trabajo (ya hay una para la academia), y además caduca tras 30 días. Por eso aquí no se incluye ningún servicio PostgreSQL en `render.yaml`. Si más adelante utilizas una base de datos de un proveedor externo, introduce la URL como variable privada `DATABASE_URL` únicamente en Render. Las claves nunca van a GitHub. Para disponer de una API de IA compatible, configura `ALANTIS_API_KEY` también como secreto del servicio, tras aceptar sus posibles costes.
 
-7. Si funciona y completas los requisitos previos al lanzamiento, activa el registro. Comprueba el login, la generación de respuestas y los datos tras un redeploy.
-
-**Limitaciones oficiales Render:** el servicio web gratuito se duerme por inactividad y el sistema de archivos es temporal. PostgreSQL Free expira en 30 días, por lo que **NO debes usarlo como base de cuentas pública permanente**. El blueprint opta por PostgreSQL persistente de pago, sujeto a precio vigente. Más información: [Render Free](https://render.com/docs/free) y [Blueprints](https://render.com/docs/blueprint-spec).
+La web gratuita puede suspenderse tras inactividad y tardar en despertarse. Consulta las condiciones actuales en [Render Free](https://render.com/docs/free).
 
 ## 5. Panel administrador
 

@@ -1,14 +1,22 @@
-# Publicar ALANTIS AI Community
+# Publicación de ALANTIS AI Community — estado real
 
-**Proyecto:** `Byl0ke/alantis-ai-community`  
-**Repositorio:** https://github.com/Byl0ke/alantis-ai-community
+**Repositorio:** https://github.com/Byl0ke/alantis-ai-community  
+**Web pública:** https://alantis-ai-community.onrender.com  
+**Servicio Render:** https://dashboard.render.com/web/srv-dbbas2s9v7es73ei2510
 
-1. Crea un repositorio **vacío** desde https://github.com/new?name=alantis-ai-community, con propietario **Byl0ke**. No marques README, gitignore ni licencia.
-2. En Windows, instala Git si aún no lo tienes y ejecuta `SUBIR_A_GITHUB.bat` desde la carpeta descomprimida. Si te pide autorización, usa el inicio de sesión de GitHub; nunca pegues una contraseña o token en el código.
-3. Comprueba en GitHub que aparecen `backend/`, `frontend/`, `render.yaml` y `README.md`. Los cambios posteriores deben enviarse a `main` con `git add`, `git commit` y `git push`.
-4. Para alojar el backend: entra a https://dashboard.render.com/, conecta GitHub y elige **New → Blueprint**, seleccionando este repositorio. **Revisa la factura y el plan de PostgreSQL antes de confirmar**: `render.yaml` incluye un PostgreSQL persistente de pago. Configura `ALANTIS_API_KEY` únicamente como variable privada en Render.
-5. La URL `*.onrender.com` será la web pública **solo cuando Render confirme un despliegue correcto**. Deja `ALANTIS_REGISTRATION_OPEN=false` hasta completar medidas de seguridad, privacidad y pruebas con la API real.
+## Publicado
 
-**No subir:** `.env`, claves API, credenciales, bases de datos SQLite, datos personales, registros privados. El proyecto ya ignora estos archivos cuando se usa Git correctamente.
+- Código v2 en la rama `main` de GitHub; actualizaciones automáticas de Render habilitadas.
+- Servidor FastAPI y frontend alojados en Frankfurt en el plan web **free**.
+- Solo **vista previa**: `ALANTIS_REGISTRATION_OPEN=false` y cookies HTTPS.
 
-**Importante:** GitHub almacena el código; no ejecuta tu aplicación FastAPI con usuarios. Sin backend desplegado, base de datos persistente y modelo IA conectado, el sitio no atenderá conversaciones públicas.
+## Pendiente antes de aceptar usuarios
+
+1. Configurar una base PostgreSQL independiente, PERSISTENTE, y colocar `DATABASE_URL` como variable privada en el servicio. **NO** usar SQLite temporal para usuarios.
+2. Elegir un proveedor de modelo de IA, definir `ALANTIS_MODEL` y guardar `ALANTIS_API_KEY` como secreto en Render; estos servicios pueden ser de pago.
+3. Añadir protecciones antibots, recuperación de cuentas, límites de abuso, políticas de privacidad/uso (RGPD) y copias de seguridad.
+4. Hacer pruebas reales de registro, sesión, chat y conservación de mensajes tras un despliegue nuevo. Solo después plantear `ALANTIS_REGISTRATION_OPEN=true`.
+
+**Importante:** el workspace ya tiene una base PostgreSQL `free` dedicada a ALANTIS AI ACADEMY; Render solo permite una por workspace y caduca a los 30 días. No reutilices esa base para este proyecto ni actives el blueprint antiguo que proponía una base de pago. El `render.yaml` actualizado **no crea bases de datos**.
+
+**Nunca subas** `.env`, claves API, tokens, credenciales, bases de datos o datos de usuarios al repositorio. El servicio se publicará automáticamente al hacer `git push` a `main` cuando Render detecte la actualización.
