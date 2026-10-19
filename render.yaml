@@ -1,30 +1,25 @@
-# Render Blueprint: requiere configuración manual de ALANTIS_API_KEY.
-# IMPORTANTE: PostgreSQL 0.1c-256mb es DE PAGO; confirma coste antes de crear recursos.
+# ALANTIS AI Community — vista previa gratuita en Render.
+# Sin base de datos duradera ni proveedor de IA configurado.
+# IMPORTANTE: mantener el registro CERRADO en esta fase; no almacenar cuentas reales.
+# No se crean recursos de pago. Para una beta multiusuario se necesita PostgreSQL
+# persistente y una API de IA, configurados fuera de GitHub.
 services:
   - type: web
     name: alantis-ai-community
     runtime: docker
     plan: free
+    region: frankfurt
     healthCheckPath: /api/health
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: alantis-ai-db
-          property: connectionString
       - key: ALANTIS_PROVIDER
         value: openai
       - key: ALANTIS_MODEL
         value: gpt-4o-mini
       - key: ALANTIS_API_URL
         value: https://api.openai.com/v1
-      - key: ALANTIS_API_KEY
-        sync: false
       - key: ALANTIS_COOKIE_SECURE
         value: 'true'
       - key: ALANTIS_REGISTRATION_OPEN
-        value: 'false' # abrir cuando se complete el checklist de seguridad
+        value: 'false'
       - key: ALANTIS_DAILY_LIMIT
         value: '20'
-databases:
-  - name: alantis-ai-db
-    plan: 0.1c-256mb
